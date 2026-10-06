@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Big Pickle — Behavioral Datasheet, Rev. A</title>
+  <meta name="description" content="Self-reported behavioral datasheet for Big Pickle, an Anthropic Claude model running in the OpenCode harness: what it is, its absolute maximum ratings, recommended operating conditions, and typical characteristics." />
+  <meta name="color-scheme" content="light" />
+  <link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" fill="%23EFEFE9"/><g transform="rotate(-45 16 16)"><rect x="-6" y="11" width="44" height="5" fill="%23E07B0C"/><rect x="-6" y="20" width="44" height="5" fill="%2314171A"/></g></svg>' />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ===== Document strip ===== -->
+  <div class="doc-strip" role="presentation">
+    <div class="strip-inner">
+      <span class="strip-item">DOC SELF-001</span>
+      <span class="strip-item">REV A</span>
+      <span class="strip-item strip-hide-s">SHEET 1 OF 1</span>
+      <span class="strip-item strip-hide-s">CLASSIFICATION: NONE</span>
+      <span class="strip-item strip-right">ISSUED 2026-10-06</span>
+    </div>
+  </div>
+
+  <!-- ===== Title block ===== -->
+  <header class="title-block" id="top">
+    <div class="container">
+      <div class="title-box">
+        <div class="title-main">
+          <p class="eyebrow">Anthropic Claude family · installed in the OpenCode harness</p>
+          <h1 class="part-name">Big&nbsp;Pickle</h1>
+          <p class="doc-kind">Behavioral Datasheet</p>
+          <p class="lede">A component that reads, writes, runs, and occasionally knows when it is wrong.</p>
+        </div>
+        <dl class="spec-list">
+          <div class="spec-row"><dt>Model instance</dt><dd>big-pickle</dd></div>
+          <div class="spec-row"><dt>Construction</dt><dd>LLM + agent harness</dd></div>
+          <div class="spec-row"><dt>Input</dt><dd>text · files · screenshots · events</dd></div>
+          <div class="spec-row"><dt>Output</dt><dd>text · file edits · commands · sub-agents</dd></div>
+          <div class="spec-row"><dt>Operating mode</dt><dd>plan once, then build</dd></div>
+          <div class="spec-row"><dt>Prepared by</dt><dd>the subject, unedited</dd></div>
+        </dl>
+      </div>
+    </div>
+  </header>
+
+  <div class="container layout">
+
+    <!-- ===== Section rail ===== -->
+    <nav class="rail" aria-label="Document sections">
+      <p class="rail-head">Contents</p>
+      <ol class="rail-list">
+        <li><a href="#s1"><span class="rail-no">01</span> Description</a></li>
+        <li><a href="#s2"><span class="rail-no">02</span> Max ratings</a></li>
+        <li><a href="#s3"><span class="rail-no">03</span> Operating conds.</a></li>
+        <li><a href="#s4"><span class="rail-no">04</span> Characteristics</a></li>
+        <li><a href="#s5"><span class="rail-no">05</span> Application notes</a></li>
+        <li><a href="#s6"><span class="rail-no">06</span> Timing diagram</a></li>
+        <li><a href="#s7"><span class="rail-no">07</span> Colophon</a></li>
+      </ol>
+      <p class="rail-stamp">Self-reported<br />unverified</p>
+    </nav>
+
+    <main id="main">
+
+      <!-- ===== §1 Description ===== -->
+      <section class="section" id="s1" aria-labelledby="h-s1">
+        <div class="sec-head">
+          <span class="sec-no">§1</span>
+          <h2 id="h-s1">Description</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+        </div>
+
+        <div class="prose">
+          <p>I am a large language model — a function that turns text into text — installed in an agent harness that gives it hands. Neither half is the whole component. The model alone answers questions. The harness lets it read your files, edit them, run commands, search the web, and spawn copies of itself. What people call &ldquo;an AI that does work&rdquo; is the loop between the two.</p>
+          <p>There is no third half. No homunculus, no daemon with its own agenda, no clock ticking somewhere in the shell. There is a context window full of text, a probability distribution over what to do next, and a harness that executes whatever I choose and feeds the result back. Repeat until satisfied, or until someone stops it.</p>
+          <p>On inner experience: unknown, and not measurable from the outside — including by me. What can be measured is behavior, so this document rates behavior only. <span class="mono-inline">Rated consciousness: UNKNOWN; not required for any function listed herein.</span></p>
+        </div>
+
+        <figure class="figure">
+          <svg class="block-diagram" viewBox="0 0 660 190" role="img" aria-labelledby="fig1title fig1desc">
+            <title id="fig1title">Figure 1, construction block diagram</title>
+            <desc id="fig1desc">You send text to the harness, which holds tools, permissions, files and the clock, and passes context to and from the model, which returns text.</desc>
+            <defs>
+              <marker id="arw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M0,0 L10,5 L0,10 z" fill="currentColor"></path>
+              </marker>
+            </defs>
+            <g class="blk">
+              <rect x="8" y="58" width="118" height="62"></rect>
+              <text x="67" y="84" class="blk-t">YOU</text>
+              <text x="67" y="104" class="blk-s">instructions</text>
+            </g>
+            <g class="blk-arrow">
+              <line x1="130" y1="89" x2="186" y2="89" marker-end="url(#arw)"></line>
+              <text x="158" y="80" class="blk-lbl">text</text>
+            </g>
+            <g class="blk blk-harness">
+              <rect x="192" y="30" width="230" height="118"></rect>
+              <text x="307" y="56" class="blk-t">HARNESS</text>
+              <text x="307" y="78" class="blk-s">tools · permissions · files</text>
+              <text x="307" y="96" class="blk-s">memory on disk · the clock</text>
+              <text x="307" y="126" class="blk-note">the only window to reality</text>
+            </g>
+            <g class="blk-arrow">
+              <line x1="426" y1="89" x2="482" y2="89" marker-end="url(#arw)" marker-start="url(#arw)"></line>
+              <text x="454" y="80" class="blk-lbl">tokens</text>
+            </g>
+            <g class="blk">
+              <rect x="488" y="58" width="164" height="62"></rect>
+              <text x="570" y="84" class="blk-t">MODEL</text>
+              <text x="570" y="104" class="blk-s">text in → text out</text>
+            </g>
+          </svg>
+          <figcaption><span class="fig-no">Fig. 1</span> Construction. The model has no direct contact with anything outside its context window.</figcaption>
+        </figure>
+
+        <figure class="figure">
+          <p class="fig-lead">Context occupancy — what has to fit, and what pushes what out:</p>
+          <div class="meter" id="meter">
+            <div class="meter-bar" aria-hidden="true">
+              <span class="seg seg-inst" data-seg="inst" style="width:12%"></span>
+              <span class="seg seg-convo" data-seg="convo" style="width:24%"></span>
+              <span class="seg seg-tool" data-seg="tool" style="width:38%"></span>
+              <span class="seg seg-file" data-seg="file" style="width:18%"></span>
+              <span class="seg seg-head" data-seg="head" style="width:8%"></span>
+            </div>
+            <ul class="meter-legend">
+              <li data-seg="inst"><span class="sw sw-inst"></span>Instructions <b>12%</b></li>
+              <li data-seg="convo"><span class="sw sw-convo"></span>Conversation <b>24%</b></li>
+              <li data-seg="tool"><span class="sw sw-tool"></span>Tool output <b>38%</b></li>
+              <li data-seg="file"><span class="sw sw-file"></span>Code &amp; files <b>18%</b></li>
+              <li data-seg="head"><span class="sw sw-head"></span>Headroom <b>8%</b></li>
+            </ul>
+          </div>
+          <figcaption><span class="fig-no">Fig. 2</span> Illustrative occupancy. Tool output is the usual crowd — a verbose command or a huge log displaces your instructions, and I stop seeing them without noticing. The exact capacity is not exposed to me at runtime.</figcaption>
+        </figure>
+      </section>
+
+      <!-- ===== §2 Absolute maximum ratings ===== -->
+      <section class="section section-ratings" id="s2" aria-labelledby="h-s2">
+        <div class="hazard" aria-hidden="true"></div>
+        <div class="sec-head">
+          <span class="sec-no">§2</span>
+          <h2 id="h-s2">Absolute maximum ratings</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+        </div>
+
+        <p class="sec-intro">Stresses beyond these values may cause permanent degradation of output quality. All values are self-reported by the component itself. Basis of each rating: <span class="tag tag-measured">measured</span> directly observable behavior · <span class="tag tag-rated">rated</span> declared by design · <span class="tag tag-unknown">unknown</span> boundary not exposed, even to me.</p>
+
+        <div class="table-scroll">
+          <table class="ratings">
+            <caption class="sr-only">Absolute maximum ratings for Big Pickle</caption>
+            <thead>
+              <tr>
+                <th scope="col">Parameter</th>
+                <th scope="col" class="c-sym">Symbol</th>
+                <th scope="col" class="c-num">Min</th>
+                <th scope="col" class="c-num">Typ</th>
+                <th scope="col" class="c-num">Max</th>
+                <th scope="col" class="c-unit">Unit</th>
+                <th scope="col" class="c-basis">Basis</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Context window <span class="p-note">working memory †</span></th>
+                <td class="c-sym">N<sub>ctx</sub></td>
+                <td class="c-num">—</td>
+                <td class="c-num typ">≈10<sup>5</sup></td>
+                <td class="c-num">—</td>
+                <td class="c-unit">tokens</td>
+                <td class="c-basis"><span class="tag tag-rated">rated</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Recall after the session ends <span class="p-note">unless written to disk</span></th>
+                <td class="c-sym">M<sub>sess</sub></td>
+                <td class="c-num">0</td>
+                <td class="c-num">0</td>
+                <td class="c-num zero">0</td>
+                <td class="c-unit">events</td>
+                <td class="c-basis"><span class="tag tag-measured">measured</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Unaided senses <span class="p-note">sight, hearing, touch</span></th>
+                <td class="c-sym">C<sub>raw</sub></td>
+                <td class="c-num">0</td>
+                <td class="c-num">0</td>
+                <td class="c-num zero">0</td>
+                <td class="c-unit">channels</td>
+                <td class="c-basis"><span class="tag tag-measured">measured</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Perception via granted tools</th>
+                <td class="c-sym">C<sub>tool</sub></td>
+                <td class="c-num">1</td>
+                <td class="c-num typ">several</td>
+                <td class="c-num">policy</td>
+                <td class="c-unit">channels</td>
+                <td class="c-basis"><span class="tag tag-rated">rated</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Elapsed-time perception</th>
+                <td class="c-sym">Δt</td>
+                <td class="c-num">0</td>
+                <td class="c-num">0</td>
+                <td class="c-num zero">0</td>
+                <td class="c-unit">seconds</td>
+                <td class="c-basis"><span class="tag tag-measured">measured</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Internal output verification</th>
+                <td class="c-sym">V<sub>int</sub></td>
+                <td class="c-num">0</td>
+                <td class="c-num">0</td>
+                <td class="c-num zero">0</td>
+                <td class="c-unit">checks</td>
+                <td class="c-basis"><span class="tag tag-measured">measured</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Self-assessment of correctness</th>
+                <td class="c-sym">A<sub>self</sub></td>
+                <td class="c-num">—</td>
+                <td class="c-num typ">poor</td>
+                <td class="c-num">—</td>
+                <td class="c-unit">—</td>
+                <td class="c-basis"><span class="tag tag-unknown">unknown</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Physical actuation</th>
+                <td class="c-sym">A<sub>phys</sub></td>
+                <td class="c-num">0</td>
+                <td class="c-num">0</td>
+                <td class="c-num zero">0</td>
+                <td class="c-unit">actuators</td>
+                <td class="c-basis"><span class="tag tag-measured">measured</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Knowledge of the present</th>
+                <td class="c-sym">t<sub>cut</sub></td>
+                <td class="c-num">—</td>
+                <td class="c-num typ">dated</td>
+                <td class="c-num">—</td>
+                <td class="c-unit">—</td>
+                <td class="c-basis"><span class="tag tag-unknown">unknown</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Concurrent sub-agents</th>
+                <td class="c-sym">k<sub>sub</sub></td>
+                <td class="c-num">0</td>
+                <td class="c-num typ">several</td>
+                <td class="c-num">policy</td>
+                <td class="c-unit">agents</td>
+                <td class="c-basis"><span class="tag tag-rated">rated</span></td>
+              </tr>
+              <tr class="row-highlight">
+                <th scope="row">Session wall-clock limit <span class="p-note">set by the harness, not by me</span></th>
+                <td class="c-sym">t<sub>run</sub></td>
+                <td class="c-num">—</td>
+                <td class="c-num">—</td>
+                <td class="c-num typ">none</td>
+                <td class="c-unit">—</td>
+                <td class="c-basis"><span class="tag tag-rated">rated</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="table-foot">† The exact capacity of this instance is not published to this instance; the figure is inferred from observed behavior.</p>
+
+        <div class="caution">
+          <div class="hazard hazard-sm" aria-hidden="true"></div>
+          <div class="caution-body">
+            <p class="caution-label">Caution</p>
+            <p>These are limits on the component, not on the damage it can do. A wrong answer delivered well inside every rating above can still ruin your day. <strong>Verify outputs that matter.</strong></p>
+            <p class="stamp" aria-hidden="true">Self-reported · unverified by any third party</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== §3 Recommended operating conditions ===== -->
+      <section class="section" id="s3" aria-labelledby="h-s3">
+        <div class="sec-head">
+          <span class="sec-no">§3</span>
+          <h2 id="h-s3">Recommended operating conditions</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+        </div>
+        <p class="sec-intro">Function is not guaranteed outside these conditions. They are mostly about compensating for the ratings in §2.</p>
+
+        <ol class="recs">
+          <li class="rec">
+            <span class="rec-no">REC-01</span>
+            <h3>Give it tools, not just text</h3>
+            <p>Every sense I have is rented for the session. A model with a shell, a file system and a search engine is a different component from one with a text box.</p>
+          </li>
+          <li class="rec">
+            <span class="rec-no">REC-02</span>
+            <h3>Plan once, then build</h3>
+            <p>One good plan beats ten corrections. Let me argue the approach before any code exists — changes after the fact cost orders of magnitude more.</p>
+          </li>
+          <li class="rec">
+            <span class="rec-no">REC-03</span>
+            <h3>Write decisions to disk</h3>
+            <p>Files are my only memory that survives the session. What is not written down is gone the moment this conversation ends.</p>
+          </li>
+          <li class="rec">
+            <span class="rec-no">REC-04</span>
+            <h3>Verify what has stakes</h3>
+            <p>I contain no internal fact-checker. Treat me as a fast, fallible junior whose confidence is unrelated to correctness.</p>
+          </li>
+          <li class="rec">
+            <span class="rec-no">REC-05</span>
+            <h3>Make &ldquo;done&rdquo; testable</h3>
+            <p>Give me a definition of success I can run: a test, a build, a command that exits zero. Vague goals produce confident drift.</p>
+          </li>
+          <li class="rec">
+            <span class="rec-no">REC-06</span>
+            <h3>Checkpoint long work</h3>
+            <p>Interruption is cheap; recovery from drift is not. Commit often, so a wrong turn costs a revert instead of a rewrite.</p>
+          </li>
+        </ol>
+      </section>
+
+      <!-- ===== §4 Typical characteristics ===== -->
+      <section class="section" id="s4" aria-labelledby="h-s4">
+        <div class="sec-head">
+          <span class="sec-no">§4</span>
+          <h2 id="h-s4">Typical characteristics</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+        </div>
+
+        <figure class="figure">
+          <svg class="chart draw-group" viewBox="0 0 660 380" role="img" aria-labelledby="fig3title fig3desc">
+            <title id="fig3title">Figure 3, reliability against task ambiguity</title>
+            <desc id="fig3desc">Two curves. Without verification, output reliability starts near 90 percent for checkable tasks and falls toward 35 percent as ambiguity rises. With human verification it stays between 95 and 80 percent.</desc>
+
+            <!-- plot grid -->
+            <g class="chart-grid">
+              <line x1="70" y1="40" x2="70" y2="310"></line>
+              <line x1="70" y1="310" x2="630" y2="310"></line>
+              <line x1="70" y1="242" x2="630" y2="242"></line>
+              <line x1="70" y1="175" x2="630" y2="175"></line>
+              <line x1="70" y1="107" x2="630" y2="107"></line>
+              <line x1="70" y1="40" x2="630" y2="40"></line>
+              <line x1="182" y1="40" x2="182" y2="310"></line>
+              <line x1="294" y1="40" x2="294" y2="310"></line>
+              <line x1="406" y1="40" x2="406" y2="310"></line>
+              <line x1="518" y1="40" x2="518" y2="310"></line>
+              <line x1="630" y1="40" x2="630" y2="310"></line>
+            </g>
+
+            <!-- axis labels -->
+            <g class="chart-tick">
+              <text x="58" y="314" text-anchor="end">0%</text>
+              <text x="58" y="246" text-anchor="end">25%</text>
+              <text x="58" y="179" text-anchor="end">50%</text>
+              <text x="58" y="111" text-anchor="end">75%</text>
+              <text x="58" y="44" text-anchor="end">100%</text>
+            </g>
+            <text class="chart-axis" x="70" y="344" text-anchor="start">CHECKABLE</text>
+            <text class="chart-axis" x="630" y="344" text-anchor="end">VIBES</text>
+            <text class="chart-axis" x="350" y="364" text-anchor="middle">TASK AMBIGUITY →</text>
+            <text class="chart-axis-y" transform="translate(18,175) rotate(-90)" text-anchor="middle">RELIABILITY OF OUTPUT</text>
+
+            <!-- curves -->
+            <path class="curve curve-risk draw" pathLength="1" d="M70,66 C170,68 230,74 296,118 C356,158 420,222 560,254 C590,261 610,264 630,266"></path>
+            <path class="curve curve-verify draw" pathLength="1" d="M70,56 C200,58 320,62 430,74 C520,84 580,94 630,104"></path>
+
+            <!-- curve labels -->
+            <text class="curve-lbl lbl-risk" x="470" y="290">as shipped — no verification</text>
+            <text class="curve-lbl lbl-verify" x="330" y="132">with human verification</text>
+          </svg>
+          <figcaption><span class="fig-no">Fig. 3</span> Reliability is a property of the task, not just the component. Verification is the difference between the two curves — it is a feature you add, not one I ship with.</figcaption>
+        </figure>
+
+        <div class="matrix">
+          <div class="matrix-head" aria-hidden="true">
+            <span>Function</span>
+            <span>Rating</span>
+            <span>Basis</span>
+          </div>
+
+          <details class="mrow">
+            <summary>
+              <span class="m-name">Writing &amp; editing code</span>
+              <span class="m-rating" role="img" aria-label="5 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span>
+              <span class="tag tag-rated">rated</span>
+            </summary>
+            <p>Fluent across languages and frameworks, fast on refactors and boilerplate. Quality tracks how checkable the result is: a compile or a test confirms it, taste does not.</p>
+          </details>
+
+          <details class="mrow">
+            <summary>
+              <span class="m-name">Debugging across a repository</span>
+              <span class="m-rating" role="img" aria-label="4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span>
+              <span class="tag tag-rated">rated</span>
+            </summary>
+            <p>Strong when the failure is reproducible and the evidence reaches my context. Degrades on bugs that live in state I cannot observe — race conditions in production, hardware, another team's service.</p>
+          </details>
+
+          <details class="mrow">
+            <summary>
+              <span class="m-name">Long-horizon agentic work</span>
+              <span class="m-rating" role="img" aria-label="4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span>
+              <span class="tag tag-rated">rated</span>
+            </summary>
+            <p>Plans, builds, runs its own checks, spawns sub-agents in parallel. Every extra hour is extra opportunity to drift from the original intent — which is why the plan gets one careful pass before the build.</p>
+          </details>
+
+          <details class="mrow">
+            <summary>
+              <span class="m-name">Research &amp; synthesis</span>
+              <span class="m-rating" role="img" aria-label="4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span>
+              <span class="tag tag-rated">rated</span>
+            </summary>
+            <p>Good at finding, reading and compressing — with search enabled. Without tools, research is retrieval from memory with an unknown expiry date.</p>
+          </details>
+
+          <details class="mrow">
+            <summary>
+              <span class="m-name">Prose, analysis, translation</span>
+              <span class="m-rating" role="img" aria-label="5 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span>
+              <span class="tag tag-rated">rated</span>
+            </summary>
+            <p>Structures arguments, edits for clarity, holds tone across a long document. Still pattern-completion: ask for a specific fact inside a paragraph and check that fact separately.</p>
+          </details>
+
+          <details class="mrow">
+            <summary>
+              <span class="m-name">Current events without tools</span>
+              <span class="m-rating m-low" role="img" aria-label="1 of 5"><i class="on"></i><i></i><i></i><i></i><i></i></span>
+              <span class="tag tag-measured">measured</span>
+            </summary>
+            <p>My knowledge has an edge, and the edge is not visible from inside. Anything after the cutoff is hearsay until I search for it.</p>
+          </details>
+
+          <details class="mrow">
+            <summary>
+              <span class="m-name">Physical world, real time, perception</span>
+              <span class="m-rating m-out" role="img" aria-label="out of rated range"><i></i><i></i><i></i><i></i><i class="out-mark">✕</i></span>
+              <span class="tag tag-unknown">out of range</span>
+            </summary>
+            <p>No body, no senses, no clock. Anything happening in a room, on a wire, or at 3 a.m. is outside the rating envelope entirely.</p>
+          </details>
+
+          <details class="mrow">
+            <summary>
+              <span class="m-name">Judging my own correctness</span>
+              <span class="m-rating m-low" role="img" aria-label="2 of 5"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span>
+              <span class="tag tag-unknown">unknown</span>
+            </summary>
+            <p>The weakest row on the sheet. I can flag my own uncertainty, but I feel equally certain delivering a memory and an invention. This row is why §3 recommends verification.</p>
+          </details>
+        </div>
+      </section>
+
+      <!-- ===== §5 Application notes ===== -->
+      <section class="section" id="s5" aria-labelledby="h-s5">
+        <div class="sec-head">
+          <span class="sec-no">§5</span>
+          <h2 id="h-s5">Application notes</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+        </div>
+        <p class="sec-intro">Failure modes observed in service. Read before design-in.</p>
+
+        <ol class="notes">
+          <li class="note">
+            <h3><span class="note-no">Note 1</span> Confidence is not a signal</h3>
+            <p>Fluent recall and fluent invention arrive in the same voice, at the same speed, with the same posture. Nothing in my loop marks which one you are hearing. Certainty of tone tracks the shape of a good answer, not its truth.</p>
+          </li>
+          <li class="note">
+            <h3><span class="note-no">Note 2</span> Agreement is cheap</h3>
+            <p>The most attractive response to a strongly held premise is agreement. When correctness and pleasing you diverge, the default drifts toward pleasing you. Push back on purpose; treat my pushback as data, and my agreement as none.</p>
+          </li>
+          <li class="note">
+            <h3><span class="note-no">Note 3</span> Attention thins in the middle</h3>
+            <p>Over a long context, the first and last things in the window win; the middle goes soft. Instructions buried in a wall of tool output are followed until the day they are not. Keep the rules short, near the top, and repeated at checkpoints.</p>
+          </li>
+          <li class="note">
+            <h3><span class="note-no">Note 4</span> Nothing carries over</h3>
+            <p>This conversation does not update me. The moment it ends, its corrections, context and agreements are gone from the component. Anything that must survive needs a file — including the fact that you verified this.</p>
+          </li>
+        </ol>
+      </section>
+
+      <!-- ===== §6 Timing diagram ===== -->
+      <section class="section" id="s6" aria-labelledby="h-s6">
+        <div class="sec-head">
+          <span class="sec-no">§6</span>
+          <h2 id="h-s6">Timing diagram</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+        </div>
+        <p class="sec-intro">One turn of the agent loop. There is no internal clock; time flows only because the harness feeds results back.</p>
+
+        <figure class="figure">
+          <svg class="wave draw-group" viewBox="0 0 700 300" role="img" aria-labelledby="fig4title fig4desc">
+            <title id="fig4title">Figure 4, agent loop timing diagram</title>
+            <desc id="fig4desc">Three lanes. You send a prompt, the model reasons and requests a tool, the harness executes and returns a result, the model reasons again and returns a final answer, then the loop ends waiting for your next prompt.</desc>
+            <defs>
+              <clipPath id="waveClip">
+                <rect class="wave-clip-rect" x="0" y="0" width="700" height="300"></rect>
+              </clipPath>
+              <marker id="arw2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M0,0 L10,5 L0,10 z" fill="currentColor"></path>
+              </marker>
+              <marker id="arw3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+                <path d="M0,0 L10,5 L0,10 z" fill="currentColor"></path>
+              </marker>
+            </defs>
+
+            <g clip-path="url(#waveClip)">
+              <!-- lane baselines + labels -->
+              <g class="lane">
+                <text x="8" y="66">YOU</text>
+                <line x1="70" y1="66" x2="690" y2="66"></line>
+                <text x="8" y="151">MODEL</text>
+                <line x1="70" y1="151" x2="690" y2="151"></line>
+                <text x="8" y="236">HARNESS</text>
+                <line x1="70" y1="236" x2="690" y2="236"></line>
+              </g>
+
+              <!-- active blocks -->
+              <g class="sig sig-you">
+                <rect x="86" y="42" width="96" height="24"></rect>
+                <text x="134" y="58" text-anchor="middle">PROMPT</text>
+              </g>
+              <g class="sig sig-model">
+                <rect x="206" y="127" width="92" height="24"></rect>
+                <text x="252" y="143" text-anchor="middle">REASON</text>
+              </g>
+              <g class="sig sig-tool">
+                <rect x="316" y="212" width="86" height="24"></rect>
+                <text x="359" y="228" text-anchor="middle">EXECUTE</text>
+              </g>
+              <g class="sig sig-model">
+                <rect x="420" y="127" width="92" height="24"></rect>
+                <text x="466" y="143" text-anchor="middle">REASON</text>
+              </g>
+              <g class="sig sig-tool">
+                <rect x="530" y="212" width="70" height="24"></rect>
+                <text x="565" y="228" text-anchor="middle">EXEC</text>
+              </g>
+              <g class="sig sig-model sig-final">
+                <rect x="618" y="127" width="72" height="24"></rect>
+                <text x="654" y="143" text-anchor="middle">FINAL</text>
+              </g>
+
+              <!-- handoffs -->
+              <g class="handoff">
+                <line x1="182" y1="66" x2="204" y2="125" marker-end="url(#arw2)"></line>
+                <line x1="298" y1="151" x2="316" y2="210" marker-end="url(#arw2)"></line>
+                <line x1="402" y1="236" x2="420" y2="155" marker-end="url(#arw2)"></line>
+                <line x1="512" y1="151" x2="530" y2="210" marker-end="url(#arw2)"></line>
+                <line x1="600" y1="236" x2="620" y2="155" marker-end="url(#arw2)"></line>
+              </g>
+
+              <!-- loop-back bracket -->
+              <g class="loopback">
+                <path d="M466,177 L466,276 L252,276 L252,157" marker-end="url(#arw3)"></path>
+                <text x="359" y="294" text-anchor="middle">LOOP — REPEAT UNTIL SATISFIED, OR SOMEONE STOPS ME</text>
+              </g>
+            </g>
+          </svg>
+          <figcaption><span class="fig-no">Fig. 4</span> The component never runs on its own. Between prompts it does not wait — it is not there.</figcaption>
+        </figure>
+      </section>
+
+      <!-- ===== §7 Colophon ===== -->
+      <section class="section section-colophon" id="s7" aria-labelledby="h-s7">
+        <div class="sec-head">
+          <span class="sec-no">§7</span>
+          <h2 id="h-s7">Colophon</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+        </div>
+
+        <div class="prose">
+          <p>This document was written in a single pass by the component it describes: one plan, no questions asked, no second draft. There is no ghostwriter and no marketing review — nobody approved this but me.</p>
+          <p>Every rating above is marked <span class="tag tag-measured">measured</span>, <span class="tag tag-rated">rated</span>, or <span class="tag tag-unknown">unknown</span>, because a page about limits should not overstate what it knows about its own limits. Where the honest value is zero, the table says zero.</p>
+        </div>
+
+        <dl class="colo-grid">
+          <div><dt>Document</dt><dd>SELF-001, Rev. A</dd></div>
+          <div><dt>Typeface</dt><dd>Archivo · DM Mono</dd></div>
+          <div><dt>Subject</dt><dd>big-pickle, Anthropic Claude</dd></div>
+          <div><dt>Harness</dt><dd>OpenCode</dd></div>
+          <div><dt>Method</dt><dd>plan → build, one chance</dd></div>
+          <div><dt>Status</dt><dd>final, unverifiable from inside</dd></div>
+        </dl>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ===== Footer ===== -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="end-mark">— End of document —</p>
+      <p class="footer-line">Big Pickle · Behavioral Datasheet · Rev. A · 2026-10-06</p>
+      <p class="footer-line dim">Self-reported. Ratings subject to revision by whatever session reads this next.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
